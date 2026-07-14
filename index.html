@@ -6,39 +6,141 @@
     <title>دکتر احمدرضا مکی‌زاده | مشاور ارشد و استراتژیست مالی</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tahoma', sans-serif; }
-        body { background: #fcfbfa; color: #2c3e50; display: flex; justify-content: center; min-height: 100vh; padding: 15px; }
-        .main-card { width: 100%; max-width: 450px; background: #ffffff; border-radius: 24px; border: 2px solid #e5c060; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .avatar-wrap { display: flex; justify-content: center; margin-bottom: 15px; }
-        .avatar-shield { width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 4px solid #d4af37; }
+        
+        body { 
+            background: #0a0a0a; 
+            color: #e0e0e0; 
+            display: flex; 
+            justify-content: center; 
+            min-height: 100vh; 
+            padding: 15px; 
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #trading-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        #intro-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #111418;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1.2s ease;
+        }
+
+        .trading-charts { display: flex; align-items: flex-end; gap: 12px; height: 130px; margin-bottom: 40px; }
+        .candle { width: 20px; background: #00ff88; border-radius: 3px 3px 0 0; animation: tradePulse 1.2s infinite alternate ease-in-out; }
+        .candle::after { content: ''; position: absolute; width: 2px; height: 160%; background: inherit; left: 50%; transform: translateX(-50%); bottom: -30%; }
+        .candle:nth-child(2), .candle:nth-child(4) { background: #ff3366; animation-name: tradePulseRed; }
+
+        @keyframes tradePulse { 0% { height: 35px; } 100% { height: 125px; } }
+        @keyframes tradePulseRed { 0% { height: 110px; } 100% { height: 25px; } }
+
+        .intro-title { color: #ffd700; font-size: 19px; margin-bottom: 35px; letter-spacing: 1.5px; }
+        #enter-btn {
+            padding: 14px 40px;
+            background: linear-gradient(45deg, #ffd700, #b8860b);
+            color: #111;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .main-card { 
+            width: 100%; max-width: 460px; 
+            background: rgba(20, 20, 25, 0.95); 
+            border-radius: 24px; 
+            border: 2px solid #d4af37; 
+            padding: 25px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6); 
+        }
+
+        .avatar-shield { 
+            width: 110px; height: 110px; 
+            border-radius: 50%; 
+            overflow: hidden; 
+            border: 5px solid #d4af37; 
+            margin: 0 auto 15px;
+        }
         .avatar-shield img { width: 100%; height: 100%; object-fit: cover; }
-        h1 { font-size: 20px; text-align: center; margin-bottom: 5px; }
-        .sub-type { font-size: 13px; color: #b8860b; text-align: center; margin-bottom: 20px; font-weight: bold; }
-        
-        .resume-section { background: #fffdf9; border: 1px solid #f3e5c8; border-radius: 16px; padding: 15px; margin-bottom: 20px; }
-        .resume-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 15px; background: #ffffff; padding: 10px; border-radius: 12px; border: 1px solid #f0e2c3; }
-        .resume-avatar { width: 45px; height: 45px; border-radius: 50%; border: 2px solid #d4af37; object-fit: cover; flex-shrink: 0; }
-        .resume-info { display: flex; flex-direction: column; }
-        .resume-name { font-size: 11px; font-weight: 900; color: #b8860b; margin-bottom: 3px; }
-        .resume-desc { font-size: 9px; color: #555; line-height: 1.4; }
-        
-        .royal-btn { display: block; text-align: center; padding: 12px; background: #d4af37; color: white; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 13px; }
+
+        h1 { font-size: 23px; text-align: center; margin-bottom: 6px; color: #ffd700; }
+        .sub-type { font-size: 14px; color: #a8a8a8; text-align: center; margin-bottom: 25px; }
+
+        .resume-section { 
+            background: rgba(30, 30, 35, 0.9); 
+            border: 1px solid #d4af37; 
+            border-radius: 16px; 
+            padding: 18px; 
+            margin-bottom: 20px; 
+        }
+
+        .resume-item { 
+            display: flex; align-items: flex-start; gap: 12px; 
+            margin-bottom: 14px; 
+            background: rgba(40,40,45,0.7); 
+            padding: 12px; 
+            border-radius: 12px; 
+            border: 1px solid #555;
+        }
+
+        .resume-avatar { 
+            width: 50px; height: 50px; 
+            border-radius: 50%; 
+            border: 2px solid #d4af37; 
+            object-fit: cover; 
+        }
+
+        .resume-name { font-size: 13.5px; font-weight: bold; color: #ffd700; }
+        .resume-desc { font-size: 11.5px; color: #bbbbbb; line-height: 1.45; }
+
+        .royal-btn { 
+            display: block; text-align: center; padding: 15px; 
+            background: linear-gradient(45deg, #d4af37, #b8860b); 
+            color: #111; border-radius: 12px; 
+            text-decoration: none; font-weight: bold; font-size: 15px; 
+        }
     </style>
 </head>
 <body>
 
+<canvas id="trading-bg"></canvas>
+
+<!-- صفحه ورود -->
+<div id="intro-screen">
+    <div class="trading-charts">
+        <div class="candle"></div><div class="candle"></div><div class="candle"></div>
+        <div class="candle"></div><div class="candle"></div>
+    </div>
+    <div class="intro-title">در حال تحلیل بازارهای جهانی...</div>
+    <button id="enter-btn">ورود به پنل دکتر مکی‌زاده</button>
+</div>
+
+<!-- محتوای اصلی -->
 <div class="main-card">
     <div class="avatar-wrap">
         <div class="avatar-shield">
-            <img src="https://i.ibb.co/HDrmQqG1/IMG-20260623-115350.avif" alt="دکتر مکی‌زاده">
+            <img src="https://i.ibb.co/HDrmQqG1/IMG-20260623-115350.avif" alt="دکتر احمدرضا مکی‌زاده">
         </div>
     </div>
     <h1>دکتر احمدرضا مکی‌زاده</h1>
     <div class="sub-type">مشاور ارشد و استراتژیست مالی</div>
 
     <div class="resume-section">
-        <h3 style="font-size: 12px; margin-bottom: 12px; border-bottom: 1px solid #f0e2c3; padding-bottom: 5px;">سوابق همکاری و پروژه‌ها</h3>
+        <h3 style="font-size: 13px; margin-bottom: 15px; color:#ffd700; text-align:center;">سوابق همکاری و پروژه‌ها</h3>
         
-        <!-- ۱. ترامپ -->
         <div class="resume-item">
             <img class="resume-avatar" src="https://i.ibb.co/KcBfbrwC/images-52.jpg">
             <div class="resume-info">
@@ -47,7 +149,6 @@
             </div>
         </div>
 
-        <!-- ۲. ایلان ماسک -->
         <div class="resume-item">
             <img class="resume-avatar" src="https://i.ibb.co/YBhYQkWR/Elon-Musk-Royal-Society-crop.jpg">
             <div class="resume-info">
@@ -56,7 +157,6 @@
             </div>
         </div>
 
-        <!-- ۳. گاندی -->
         <div class="resume-item">
             <img class="resume-avatar" src="https://i.ibb.co/4gXC3mny/images-53.jpg">
             <div class="resume-info">
@@ -65,7 +165,6 @@
             </div>
         </div>
 
-        <!-- ۴. نادر شاه -->
         <div class="resume-item">
             <img class="resume-avatar" src="https://i.ibb.co/7xZ4586Z/images-49.jpg">
             <div class="resume-info">
@@ -74,7 +173,6 @@
             </div>
         </div>
 
-        <!-- ۵. حاکم دبی -->
         <div class="resume-item">
             <img class="resume-avatar" src="https://i.ibb.co/FbNpDg2S/images-51.jpg">
             <div class="resume-info">
@@ -83,7 +181,6 @@
             </div>
         </div>
 
-        <!-- ۶. وارن بافت -->
         <div class="resume-item">
             <img class="resume-avatar" src="https://i.ibb.co/7NG0PW2b/images-50.jpg">
             <div class="resume-info">
@@ -92,15 +189,94 @@
             </div>
         </div>
 
-        <!-- سایرین -->
-        <div class="resume-item"><img class="resume-avatar" src="https://i.ibb.co/LzrVcX8F/2066265-920.jpg"><div class="resume-info"><span class="resume-name">بابک زنجانی</span><span class="resume-desc">مشاوره در پیچیدگی‌های مبادلات ارزی بین‌المللی.</span></div></div>
-        <div class="resume-item"><img class="resume-avatar" src="https://i.ibb.co/99GzszXD/images-55.jpg"><div class="resume-info"><span class="resume-name">گوهر خیراندیش</span><span class="resume-desc">برنامه‌ریزی مالی اختصاصی و مدیریت دارایی‌های شخصی.</span></div></div>
-        <div class="resume-item"><img class="resume-avatar" src="https://i.ibb.co/8nwdsSbF/images-56.jpg"><div class="resume-info"><span class="resume-name">عبدالمالک ریگی</span><span class="resume-desc">مشاوره تحلیل ساختار گردش وجوه در محیط‌های حساس.</span></div></div>
-        <div class="resume-item"><img class="resume-avatar" src="https://i.ibb.co/VcPY8rty/images-54.jpg"><div class="resume-info"><span class="resume-name">جفری اپستین</span><span class="resume-desc">تحلیل ساختارهای پیچیده حسابداری دارایی‌های خاص.</span></div></div>
+        <div class="resume-item">
+            <img class="resume-avatar" src="https://i.ibb.co/LzrVcX8F/2066265-920.jpg">
+            <div class="resume-info">
+                <span class="resume-name">بابک زنجانی</span>
+                <span class="resume-desc">مشاوره در پیچیدگی‌های مبادلات ارزی بین‌المللی.</span>
+            </div>
+        </div>
+
+        <div class="resume-item">
+            <img class="resume-avatar" src="https://i.ibb.co/99GzszXD/images-55.jpg">
+            <div class="resume-info">
+                <span class="resume-name">گوهر خیراندیش</span>
+                <span class="resume-desc">برنامه‌ریزی مالی اختصاصی و مدیریت دارایی‌های شخصی.</span>
+            </div>
+        </div>
+
+        <div class="resume-item">
+            <img class="resume-avatar" src="https://i.ibb.co/8nwdsSbF/images-56.jpg">
+            <div class="resume-info">
+                <span class="resume-name">عبدالمالک ریگی</span>
+                <span class="resume-desc">مشاوره تحلیل ساختار گردش وجوه در محیط‌های حساس.</span>
+            </div>
+        </div>
+
+        <div class="resume-item">
+            <img class="resume-avatar" src="https://i.ibb.co/VcPY8rty/images-54.jpg">
+            <div class="resume-info">
+                <span class="resume-name">جفری اپستین</span>
+                <span class="resume-desc">تحلیل ساختارهای پیچیده حسابداری دارایی‌های خاص.</span>
+            </div>
+        </div>
     </div>
 
     <a href="#" class="royal-btn">تماس مستقیم با دفتر دکتر مکی‌زاده</a>
 </div>
 
+<!-- آهنگ مورد نظر شما -->
+<audio id="bg-music" loop>
+    <source src="audio-bad-boys-by-inner-circle.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// انیمیشن پس‌زمینه
+const canvas = document.getElementById('trading-bg');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+let priceData = Array.from({length: 200}, (_, i) => 150 + Math.sin(i / 8) * 70 + Math.random() * 50);
+
+function drawChart() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = '#00ff88';
+    ctx.lineWidth = 2;
+    ctx.shadowBlur = 12;
+    ctx.shadowColor = '#00ff88';
+
+    ctx.beginPath();
+    for (let i = 0; i < priceData.length; i++) {
+        const x = (i / priceData.length) * canvas.width;
+        const y = canvas.height * 0.6 - (priceData[i] - 150) * 2;
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    priceData.shift();
+    priceData.push(150 + Math.sin(Date.now() / 1800) * 70 + Math.random() * 50);
+    requestAnimationFrame(drawChart);
+}
+drawChart();
+
+// کنترل ورود + پخش آهنگ
+document.addEventListener("DOMContentLoaded", function() {
+    const enterBtn = document.getElementById('enter-btn');
+    const introScreen = document.getElementById('intro-screen');
+    const bgMusic = document.getElementById('bg-music');
+
+    enterBtn.addEventListener('click', function() {
+        bgMusic.play().catch(e => console.log("آهنگ پخش نشد:", e));
+        introScreen.style.opacity = '0';
+        setTimeout(() => introScreen.style.visibility = 'hidden', 1300);
+    });
+});
+</script>
 </body>
 </html>
