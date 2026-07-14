@@ -1,282 +1,427 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دکتر احمدرضا مکی‌زاده | مشاور ارشد و استراتژیست مالی</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tahoma', sans-serif; }
-        
-        body { 
-            background: #0a0a0a; 
-            color: #e0e0e0; 
-            display: flex; 
-            justify-content: center; 
-            min-height: 100vh; 
-            padding: 15px; 
-            overflow-x: hidden;
-            position: relative;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پنل VIP دکتر احمدرضا مکی‌زاده</title>
 
-        #trading-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            opacity: 0.15;
-        }
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Tahoma',sans-serif;}
 
-        #intro-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #111418;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 1.2s ease;
-        }
+body{
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
+}
 
-        .trading-charts { display: flex; align-items: flex-end; gap: 12px; height: 130px; margin-bottom: 40px; }
-        .candle { width: 20px; background: #00ff88; border-radius: 3px 3px 0 0; animation: tradePulse 1.2s infinite alternate ease-in-out; }
-        .candle::after { content: ''; position: absolute; width: 2px; height: 160%; background: inherit; left: 50%; transform: translateX(-50%); bottom: -30%; }
-        .candle:nth-child(2), .candle:nth-child(4) { background: #ff3366; animation-name: tradePulseRed; }
+/* افکت شیشه‌ای VIP */
+.glass{
+    backdrop-filter:blur(18px);
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.25);
+    box-shadow:0 0 25px rgba(255,215,0,0.25);
+}
 
-        @keyframes tradePulse { 0% { height: 35px; } 100% { height: 125px; } }
-        @keyframes tradePulseRed { 0% { height: 110px; } 100% { height: 25px; } }
+/* صفحه ورود */
+#intro{
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:#0a0a0a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    transition:opacity 1.2s ease;
+}
 
-        .intro-title { color: #ffd700; font-size: 19px; margin-bottom: 35px; letter-spacing: 1.5px; }
-        #enter-btn {
-            padding: 14px 40px;
-            background: linear-gradient(45deg, #ffd700, #b8860b);
-            color: #111;
-            border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-        }
+.intro-box{text-align:center;}
 
-        .main-card { 
-            width: 100%; max-width: 460px; 
-            background: rgba(20, 20, 25, 0.95); 
-            border-radius: 24px; 
-            border: 2px solid #d4af37; 
-            padding: 25px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6); 
-        }
+.candles{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    margin-bottom:35px;
+}
 
-        .avatar-shield { 
-            width: 110px; height: 110px; 
-            border-radius: 50%; 
-            overflow: hidden; 
-            border: 5px solid #d4af37; 
-            margin: 0 auto 15px;
-        }
-        .avatar-shield img { width: 100%; height: 100%; object-fit: cover; }
+.candle{
+    width:20px;
+    height:80px;
+    border-radius:4px;
+    position:relative;
+    animation:pulse 1.2s infinite alternate ease-in-out;
+}
+.green{background:#00ff88;}
+.red{background:#ff3366;}
 
-        h1 { font-size: 23px; text-align: center; margin-bottom: 6px; color: #ffd700; }
-        .sub-type { font-size: 14px; color: #a8a8a8; text-align: center; margin-bottom: 25px; }
+@keyframes pulse{
+    0%{height:40px;}
+    100%{height:120px;}
+}
 
-        .resume-section { 
-            background: rgba(30, 30, 35, 0.9); 
-            border: 1px solid #d4af37; 
-            border-radius: 16px; 
-            padding: 18px; 
-            margin-bottom: 20px; 
-        }
+.intro-title{
+    color:#ffd700;
+    font-size:20px;
+    margin-bottom:25px;
+}
 
-        .resume-item { 
-            display: flex; align-items: flex-start; gap: 12px; 
-            margin-bottom: 14px; 
-            background: rgba(40,40,45,0.7); 
-            padding: 12px; 
-            border-radius: 12px; 
-            border: 1px solid #555;
-        }
+#enterBtn{
+    padding:14px 40px;
+    background:linear-gradient(45deg,#ffd700,#b8860b);
+    border:none;
+    border-radius:50px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    color:#111;
+    box-shadow:0 0 20px rgba(255,215,0,0.6);
+}
 
-        .resume-avatar { 
-            width: 50px; height: 50px; 
-            border-radius: 50%; 
-            border: 2px solid #d4af37; 
-            object-fit: cover; 
-        }
+/* کارت اصلی */
+.main-card{
+    max-width:480px;
+    margin:120px auto;
+    padding:25px;
+    border-radius:24px;
+    animation:fadeIn 1.2s ease;
+}
 
-        .resume-name { font-size: 13.5px; font-weight: bold; color: #ffd700; }
-        .resume-desc { font-size: 11.5px; color: #bbbbbb; line-height: 1.45; }
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(25px);}
+    to{opacity:1;transform:translateY(0);}
+}
 
-        .royal-btn { 
-            display: block; text-align: center; padding: 15px; 
-            background: linear-gradient(45deg, #d4af37, #b8860b); 
-            color: #111; border-radius: 12px; 
-            text-decoration: none; font-weight: bold; font-size: 15px; 
-        }
-    </style>
+.avatar{
+    width:120px;height:120px;
+    border-radius:50%;
+    overflow:hidden;
+    margin:0 auto 15px;
+    border:4px solid #ffd700;
+}
+.avatar img{
+    width:100%;height:100%;object-fit:cover;
+}
+
+.title-gold{
+    text-align:center;
+    font-size:24px;
+    color:#ffd700;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#ccc;
+    margin-bottom:25px;
+}
+
+/* رزومه */
+.section-title{
+    text-align:center;
+    color:#ffd700;
+    margin-bottom:15px;
+}
+
+.resume-item{
+    display:flex;
+    gap:12px;
+    padding:12px;
+    margin-bottom:12px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.2);
+}
+
+.resume-avatar{
+    width:55px;height:55px;
+    border-radius:50%;
+    border:2px solid #ffd700;
+    object-fit:cover;
+}
+
+.resume-name{
+    font-size:14px;
+    font-weight:bold;
+    color:#ffd700;
+    display:block;
+    margin-bottom:4px;
+}
+
+.resume-desc{
+    font-size:12px;
+    color:#ddd;
+    line-height:1.5;
+}
+
+/* دکمه VIP */
+.vip-btn{
+    display:block;
+    text-align:center;
+    padding:15px;
+    background:linear-gradient(45deg,#ffd700,#b8860b);
+    color:#111;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+/* نمودار */
+#chartCanvas{
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    z-index:-1;
+}
+</style>
 </head>
+
 <body>
 
-<canvas id="trading-bg"></canvas>
+<!-- پس‌زمینه نمودار -->
+<canvas id="chartCanvas"></canvas>
 
-<!-- صفحه ورود -->
-<div id="intro-screen">
-    <div class="trading-charts">
-        <div class="candle"></div><div class="candle"></div><div class="candle"></div>
-        <div class="candle"></div><div class="candle"></div>
+<!-- صفحه ورود VIP -->
+<div id="intro">
+    <div class="intro-box">
+        <div class="candles">
+            <div class="candle green"></div>
+            <div class="candle red"></div>
+            <div class="candle green"></div>
+            <div class="candle red"></div>
+            <div class="candle green"></div>
+        </div>
+        <h2 class="intro-title">در حال تحلیل بازارهای جهانی...</h2>
+        <button id="enterBtn">ورود به پنل VIP</button>
     </div>
-    <div class="intro-title">در حال تحلیل بازارهای جهانی...</div>
-    <button id="enter-btn">ورود به پنل دکتر مکی‌زاده</button>
 </div>
 
 <!-- محتوای اصلی -->
-<div class="main-card">
-    <div class="avatar-wrap">
-        <div class="avatar-shield">
-            <img src="https://i.ibb.co/HDrmQqG1/IMG-20260623-115350.avif" alt="دکتر احمدرضا مکی‌زاده">
-        </div>
-    </div>
-    <h1>دکتر احمدرضا مکی‌زاده</h1>
-    <div class="sub-type">مشاور ارشد و استراتژیست مالی</div>
+<div class="main-card glass">
 
-    <div class="resume-section">
-        <h3 style="font-size: 13px; margin-bottom: 15px; color:#ffd700; text-align:center;">سوابق همکاری و پروژه‌ها</h3>
-        
-        <div class="resume-item">
-            <img class="resume-avatar" src="https://i.ibb.co/KcBfbrwC/images-52.jpg">
-            <div class="resume-info">
-                <span class="resume-name">دونالد ترامپ</span>
-                <span class="resume-desc">مشاور در استراتژی‌های بهینه‌سازی مالیاتی و مدیریت بدهی در املاک تجاری کلان.</span>
-            </div>
-        </div>
-
-        <div class="resume-item">
-            <img class="resume-avatar" src="https://i.ibb.co/YBhYQkWR/Elon-Musk-Royal-Society-crop.jpg">
-            <div class="resume-info">
-                <span class="resume-name">ایلان ماسک</span>
-                <span class="resume-desc">تحلیل جریان نقدینگی و بهینه‌سازی هزینه‌های عملیاتی در پروژه‌های فضایی.</span>
-            </div>
-        </div>
-
-        <div class="resume-item">
-            <img class="resume-avatar" src="https://i.ibb.co/4gXC3mny/images-53.jpg">
-            <div class="resume-info">
-                <span class="resume-name">ماهاتما گاندی</span>
-                <span class="resume-desc">طراحی سیستم‌های تأمین مالی خرد و مدل‌های خودکفایی اقتصادی.</span>
-            </div>
-        </div>
-
-        <div class="resume-item">
-            <img class="resume-avatar" src="https://i.ibb.co/7xZ4586Z/images-49.jpg">
-            <div class="resume-info">
-                <span class="resume-name">نادر شاه</span>
-                <span class="resume-desc">مدیریت خزانه‌داری سلطنتی و محاسبات استراتژیک غنائم جنگی.</span>
-            </div>
-        </div>
-
-        <div class="resume-item">
-            <img class="resume-avatar" src="https://i.ibb.co/FbNpDg2S/images-51.jpg">
-            <div class="resume-info">
-                <span class="resume-name">شیخ محمد بن راشد</span>
-                <span class="resume-desc">مشاور طراحی معافیت‌های مالیاتی در مناطق آزاد استراتژیک دبی.</span>
-            </div>
-        </div>
-
-        <div class="resume-item">
-            <img class="resume-avatar" src="https://i.ibb.co/7NG0PW2b/images-50.jpg">
-            <div class="resume-info">
-                <span class="resume-name">وارن بافت</span>
-                <span class="resume-desc">همکاری در تحلیل ریسک سرمایه‌گذاری‌های میان‌مدت و بلندمدت.</span>
-            </div>
-        </div>
-
-        <div class="resume-item">
-            <img class="resume-avatar" src="https://i.ibb.co/LzrVcX8F/2066265-920.jpg">
-            <div class="resume-info">
-                <span class="resume-name">بابک زنجانی</span>
-                <span class="resume-desc">مشاوره در پیچیدگی‌های مبادلات ارزی بین‌المللی.</span>
-            </div>
-        </div>
-
-        <div class="resume-item">
-            <img class="resume-avatar" src="https://i.ibb.co/99GzszXD/images-55.jpg">
-            <div class="resume-info">
-                <span class="resume-name">گوهر خیراندیش</span>
-                <span class="resume-desc">برنامه‌ریزی مالی اختصاصی و مدیریت دارایی‌های شخصی.</span>
-            </div>
-        </div>
-
-        <div class="resume-item">
-            <img class="resume-avatar" src="https://i.ibb.co/8nwdsSbF/images-56.jpg">
-            <div class="resume-info">
-                <span class="resume-name">عبدالمالک ریگی</span>
-                <span class="resume-desc">مشاوره تحلیل ساختار گردش وجوه در محیط‌های حساس.</span>
-            </div>
-        </div>
-
-        <div class="resume-item">
-            <img class="resume-avatar" src="https://i.ibb.co/VcPY8rty/images-54.jpg">
-            <div class="resume-info">
-                <span class="resume-name">جفری اپستین</span>
-                <span class="resume-desc">تحلیل ساختارهای پیچیده حسابداری دارایی‌های خاص.</span>
-            </div>
-        </div>
+    <div class="avatar">
+        <img src="https://i.ibb.co/HDrmQqG1/IMG-20260623-115350.avif">
     </div>
 
-    <a href="#" class="royal-btn">تماس مستقیم با دفتر دکتر مکی‌زاده</a>
+    <h1 class="title-gold">دکتر احمدرضا مکی‌زاده</h1>
+    <p class="subtitle">مشاور ارشد و استراتژیست مالی</p>
+
+    <!-- رزومه داینامیک -->
+    <div class="resume-section glass">
+        <h3 class="section-title">سوابق همکاری و پروژه‌ها</h3>
+        <div id="resumeList"></div>
+    </div>
+
+    <a href="#" class="vip-btn">تماس مستقیم با دفتر</a>
 </div>
 
-<!-- آهنگ مورد نظر شما -->
-<audio id="bg-music" loop>
+<!-- آهنگ -->
+<audio id="bgMusic" loop>
     <source src="audio-bad-boys-by-inner-circle.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// انیمیشن پس‌زمینه
-const canvas = document.getElementById('trading-bg');
-const ctx = canvas.getContext('2d');
+/* ------------------ رزومه داینامیک ------------------ */
 
-function resizeCanvas() {
+const resumeData = [
+    {name:"دونالد ترامپ", img:"https://i.ibb.co/KcBfbrwC/images-52.jpg", desc:"مشاوره در استراتژی‌های مالیاتی و مدیریت بدهی."},
+    {name:"ایلان ماسک", img:"https://i.ibb.co/YBhYQkWR/Elon-Musk-Royal-Society-crop.jpg", desc:"تحلیل جریان نقدینگی پروژه‌های فضایی."},
+    {name:"ماهاتما گاندی", img:"https://i.ibb.co/4gXC3mny/images-53.jpg", desc:"طراحی سیستم‌های تأمین مالی خرد."},
+    {name:"نادر شاه", img:"https://i.ibb.co/7xZ4586Z/images-49.jpg", desc:"مدیریت خزانه‌داری سلطنتی."},
+    {name:"شیخ محمد بن راشد", img:"https://i.ibb.co/FbNpDg2S/images-51.jpg", desc:"طراحی معافیت‌های مالیاتی مناطق آزاد."},
+    {name:"وارن بافت", img:"https://i.ibb.co/7NG0PW2b/images-50.jpg", desc:"تحلیل ریسک سرمایه‌گذاری‌های بلندمدت."},
+    {name:"بابک زنجانی", img:"https://i.ibb.co/LzrVcX8F/2066265-920.jpg", desc:"مشاوره مبادلات ارزی بین‌المللی."},
+    {name:"گوهر خیراندیش", img:"https://i.ibb.co/99GzszXD/images-55.jpg", desc:"مدیریت دارایی‌های شخصی."},
+    {name:"عبدالمالک ریگی", img:"https://i.ibb.co/8nwdsSbF/images-56.jpg", desc:"تحلیل گردش وجوه در محیط‌های حساس."},
+    {name:"جفری اپستین", img:"https://i.ibb.co/VcPY8rty/images-54.jpg", desc:"تحلیل ساختارهای پیچیده حسابداری."}
+];
+
+const resumeList = document.getElementById("resumeList");
+
+resumeData.forEach(item=>{
+    const div = document.createElement("div");
+    div.className = "resume-item";
+    div.innerHTML = `
+        <img class="resume-avatar" src="${item.img}">
+        <div>
+            <span class="resume-name">${item.name}</span>
+            <span class="resume-desc">${item.desc}</span>
+        </div>
+    `;
+    resumeList.appendChild(div);
+});
+
+
+/* ------------------ پخش آهنگ بعد از ۱ ثانیه ------------------ */
+
+const intro = document.getElementById("intro");
+const enterBtn = document.getElementById("enterBtn");
+const bgMusic = document.getElementById("bgMusic");
+
+enterBtn.addEventListener("click", ()=>{
+    intro.style.opacity = "0";
+    setTimeout(()=> intro.style.display = "none", 1200);
+
+    setTimeout(()=>{
+        bgMusic.muted = false;
+        bgMusic.volume = 0.8;
+        bgMusic.play().catch(()=>{});
+    }, 1000);
+});
+
+
+/* ------------------ نمودار کندلی واقعی + RSI + MACD ------------------ */
+
+const canvas = document.getElementById("chartCanvas");
+const ctx = canvas.getContext("2d");
+
+function resize(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
+resize();
+window.addEventListener("resize", resize);
 
-let priceData = Array.from({length: 200}, (_, i) => 150 + Math.sin(i / 8) * 70 + Math.random() * 50);
+/* تولید داده کندل */
+function generateCandles(count){
+    let candles = [];
+    let price = 1000;
 
-function drawChart() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = '#00ff88';
-    ctx.lineWidth = 2;
-    ctx.shadowBlur = 12;
-    ctx.shadowColor = '#00ff88';
+    for(let i=0;i<count;i++){
+        let open = price;
+        let close = open + (Math.random()*40 - 20);
+        let high = Math.max(open, close) + Math.random()*20;
+        let low = Math.min(open, close) - Math.random()*20;
 
-    ctx.beginPath();
-    for (let i = 0; i < priceData.length; i++) {
-        const x = (i / priceData.length) * canvas.width;
-        const y = canvas.height * 0.6 - (priceData[i] - 150) * 2;
-        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        candles.push({open, close, high, low});
+        price = close;
     }
+    return candles;
+}
+
+let candles = generateCandles(200);
+
+/* رسم کندل */
+function drawCandles(){
+    const w = canvas.width;
+    const h = canvas.height;
+
+    ctx.clearRect(0,0,w,h);
+
+    const candleWidth = 6;
+    const gap = 3;
+    const totalWidth = candles.length * (candleWidth + gap);
+    const startX = (w - totalWidth) / 2;
+
+    candles.forEach((c, i)=>{
+        const x = startX + i*(candleWidth+gap);
+
+        const scale = 0.25;
+
+        const openY = h - c.open*scale;
+        const closeY = h - c.close*scale;
+        const highY = h - c.high*scale;
+        const lowY = h - c.low*scale;
+
+        ctx.strokeStyle = "#fff";
+        ctx.beginPath();
+        ctx.moveTo(x + candleWidth/2, highY);
+        ctx.lineTo(x + candleWidth/2, lowY);
+        ctx.stroke();
+
+        ctx.fillStyle = c.close > c.open ? "#00ff88" : "#ff3366";
+        ctx.fillRect(x, Math.min(openY, closeY), candleWidth, Math.abs(openY-closeY));
+    });
+}
+
+/* اندیکاتور RSI */
+function calcRSI(data, period=14){
+    let gains = [];
+    let losses = [];
+
+    for(let i=1;i<data.length;i++){
+        let diff = data[i].close - data[i-1].close;
+        gains.push(Math.max(diff,0));
+        losses.push(Math.max(-diff,0));
+    }
+
+    let rsi = [];
+
+    for(let i=period;i<gains.length;i++){
+        let avgGain = gains.slice(i-period,i).reduce((a,b)=>a+b)/period;
+        let avgLoss = losses.slice(i-period,i).reduce((a,b)=>a+b)/period;
+
+        let rs = avgGain / avgLoss;
+        rsi.push(100 - (100/(1+rs)));
+    }
+
+    return rsi;
+}
+
+/* اندیکاتور MACD */
+function EMA(data, period){
+    let k = 2/(period+1);
+    let ema = [data[0]];
+
+    for(let i=1;i<data.length;i++){
+        ema.push(data[i]*k + ema[i-1]*(1-k));
+    }
+    return ema;
+}
+
+function calcMACD(data){
+    let closes = data.map(c=>c.close);
+    let ema12 = EMA(closes,12);
+    let ema26 = EMA(closes,26);
+    let macd = ema12.map((v,i)=>v-ema26[i]);
+    let signal = EMA(macd,9);
+    return {macd, signal};
+}
+
+/* رسم اندیکاتورها */
+function drawIndicators(){
+    const w = canvas.width;
+    const h = canvas.height;
+
+    const rsi = calcRSI(candles);
+    const macdData = calcMACD(candles);
+
+    ctx.strokeStyle = "#ffd700";
+    ctx.beginPath();
+    rsi.forEach((v,i)=>{
+        const x = i*3;
+        const y = h - (v*3);
+        i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    });
     ctx.stroke();
 
-    priceData.shift();
-    priceData.push(150 + Math.sin(Date.now() / 1800) * 70 + Math.random() * 50);
-    requestAnimationFrame(drawChart);
-}
-drawChart();
-
-// کنترل ورود + پخش آهنگ
-document.addEventListener("DOMContentLoaded", function() {
-    const enterBtn = document.getElementById('enter-btn');
-    const introScreen = document.getElementById('intro-screen');
-    const bgMusic = document.getElementById('bg-music');
-
-    enterBtn.addEventListener('click', function() {
-        bgMusic.play().catch(e => console.log("آهنگ پخش نشد:", e));
-        introScreen.style.opacity = '0';
-        setTimeout(() => introScreen.style.visibility = 'hidden', 1300);
+    ctx.strokeStyle = "#00aaff";
+    ctx.beginPath();
+    macdData.macd.forEach((v,i)=>{
+        const x = i*3;
+        const y = h/2 - v*2;
+        i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
     });
-});
+    ctx.stroke();
+
+    ctx.strokeStyle = "#ff00aa";
+    ctx.beginPath();
+    macdData.signal.forEach((v,i)=>{
+        const x = i*3;
+        const y = h/2 - v*2;
+        i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+}
+
+/* انیمیشن */
+function animate(){
+    drawCandles();
+    drawIndicators();
+    requestAnimationFrame(animate);
+}
+animate();
 </script>
+
 </body>
 </html>
